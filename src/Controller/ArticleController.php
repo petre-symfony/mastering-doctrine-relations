@@ -39,12 +39,12 @@ class ArticleController extends AbstractController {
   /**
    * @Route("/news/{slug}", name="article_show")
    */
-  public function show(Article $article, CommentRepository $commentRepository, SlackClient $slack) {
+  public function show(Article $article, SlackClient $slack) {
     if ($article->getSlug() === 'khaaaaaan') {
       $slack->sendMessage('Kahn', 'Ah, Kirk, my old friend...');
     }
 
-    $comments = $commentRepository->findBy(['article' => $article]);
+    $comments = $article->getComments();
     dump($comments); die;
 
     $comments = [
