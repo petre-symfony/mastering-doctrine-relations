@@ -13,7 +13,8 @@ class CommentAdminController extends AbstractController {
    */
   public function index(CommentRepository $repository, Request $request) {
   	$q = $request->query->get('q');
-  	$comments = $repository->findBy([], ["createdAt" => 'DESC']);
+  	$comments = $repository->findAllWithSearch($q);
+
     return $this->render('comment_admin/index.html.twig', [
       'comments' => $comments
     ]);
