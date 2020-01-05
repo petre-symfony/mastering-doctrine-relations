@@ -6,7 +6,7 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class CommentFixture extends BaseFixture {
+class A0CommentFixture extends BaseFixture {
   protected function loadData(ObjectManager $manager){
     $this->createMany(Comment::class, 100,function (Comment $comment){
     	$comment->setContent(
