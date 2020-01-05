@@ -167,7 +167,7 @@ class Article {
 	 */
 	public function getNonDeletedComments(): Collection {
 		$criteria = ArticleRepository::createNonDeletedCriteria();
-		
+
 		return $this->comments->matching($criteria);
 	}
 
