@@ -14,16 +14,16 @@ class CommentAdminController extends AbstractController {
    */
   public function index(CommentRepository $repository, Request $request, PaginatorInterface $paginator) {
   	$q = $request->query->get('q');
-  	$comments = $repository->findAllWithSearch($q);
+  	$queryBuilder = $repository->getWithSearchQueryBuilder($q);
 
 	  $pagination = $paginator->paginate(
-		  $query, /* query NOT result */
+		  $queryBuilder, /* query NOT result */
 		  $request->query->getInt('page', 1), /*page number*/
 		  10 /*limit per page*/
 	  );
 	  
     return $this->render('comment_admin/index.html.twig', [
-      'comments' => $comments
+      'pagination' => $pagination
     ]);
   }
 }
