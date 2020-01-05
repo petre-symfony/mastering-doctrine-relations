@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -164,7 +165,12 @@ class Article {
 	 * @return Collection|Comment[]
 	 */
 	public function getNonDeletedComments(): Collection {
-		return $this->comments;
+		$criteria = Criteria::create()
+			->andWhere(Criteria::expr()->eq('isDeleted', false))
+			->orderBy(['createdAt' => 'DESC'])
+		;
+
+		return $this->comments->matching($criteria);
 	}
 
   public function addComment(Comment $comment): self {
