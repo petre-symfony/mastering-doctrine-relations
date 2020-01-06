@@ -66,11 +66,8 @@ EOF
         );
 
 		    foreach ($tags as $tag){
-		    	$tag->getName();
-		    	dump($tag);
+		    	$article->addTag($tag);
 		    }
-
-		    die;
     });
 
     $manager->flush();
