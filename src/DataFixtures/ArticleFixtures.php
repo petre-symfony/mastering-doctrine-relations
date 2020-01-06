@@ -58,14 +58,19 @@ EOF
           ->setHeartCount($this->faker->numberBetween(5, 100))
           ->setImageFilename($this->faker->randomElement(self::$articleImages))
         ;
-        
+        /** @var Tag[] $tags */
         $tags = $this->
           getRandomReferences(
           	Tag::class,
 	          $this->faker->numberBetween(0, 5)
         );
 
-		    dump($tags);die;
+		    foreach ($tags as $tag){
+		    	$tag->getName();
+		    	dump($tag);
+		    }
+
+		    die;
     });
 
     $manager->flush();
