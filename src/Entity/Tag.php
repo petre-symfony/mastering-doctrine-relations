@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
 class Tag {
+	use TimestampableEntity;
   /**
    * @ORM\Id()
    * @ORM\GeneratedValue()
@@ -21,7 +24,8 @@ class Tag {
   private $name;
 
   /**
-   * @ORM\Column(type="string", length=255)
+   * @ORM\Column(type="string", length=255, unique=true)
+   * @Gedmo\Slug(fields={"name"})
    */
   private $slug;
 
